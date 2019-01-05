@@ -33,6 +33,19 @@ app.get('/movies/:title', (req, res) => {
     });
 });
 
+app.put('/movies/:title', (req, res) => {
+    if (!movieStore.update(req.params.title, req.body)) {
+        res.statusCode = 500;
+        return res.send({
+            message: "failed to update movie info"
+        })
+    }
+
+    return res.send({
+        message: 'update movie successfully',
+    });
+});
+
 app.post('/movies', (req, res) => {
     if (!req.body.Title || req.body.Title.trim().length < 1) {
         res.statusCode = 400;
