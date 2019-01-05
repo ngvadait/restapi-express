@@ -27,7 +27,7 @@ app.get('/movies', (req, res) => {
 
     let results = paginate(movies, size, page);
 
-    return res.send({
+    return res.json({
         title: req.query.title,
         totalPage: movies.length,
         page: page,
@@ -41,12 +41,12 @@ app.get('/movies/:title', (req, res) => {
 
     if (foundMovies.length < 1) {
         res.statusCode = 404;
-        return res.send({
+        return res.json({
             message: 'movie not found'
         })
     }
 
-    return res.send({
+    return res.json({
         message: 'found movie',
         payload: foundMovies.pop()
     });
@@ -55,12 +55,12 @@ app.get('/movies/:title', (req, res) => {
 app.put('/movies/:title', (req, res) => {
     if (!movieStore.update(req.params.title, req.body)) {
         res.statusCode = 500;
-        return res.send({
+        return res.json({
             message: "failed to update movie info"
         })
     }
 
-    return res.send({
+    return res.json({
         message: 'update movie successfully',
     });
 });
@@ -68,14 +68,14 @@ app.put('/movies/:title', (req, res) => {
 app.delete('/movies/:title', (req, res) => {
     if (!movieStore.has(req.params.title)) {
         res.statusCode = 404;
-        return res.send({
+        return res.json({
             message: "movie not found"
         })
     }
 
     movieStore.remove(req.params.title);
 
-    return res.send({
+    return res.json({
         message: 'delete movie successfully',
     });
 });
@@ -83,21 +83,21 @@ app.delete('/movies/:title', (req, res) => {
 app.post('/movies', (req, res) => {
     if (!req.body.Title || req.body.Title.trim().length < 1) {
         res.statusCode = 400;
-        return res.send({
+        return res.json({
             message: "missing or invalid title"
         })
     }
 
     if (movieStore.has(req.body.Title)) {
         res.statusCode = 400;
-        return res.send({
+        return res.json({
             message: "movie already existed"
         })
     }
 
     movieStore.add(req.body);
 
-    return res.send({
+    return res.json({
         messageL: "movie added successfully"
     });
 });
