@@ -10,6 +10,16 @@ class MovieStore {
     find(title) {
         return this.movieData.filter(m => m.Title === title);
     }
+
+    add(movie) {
+        this.movieData.push(movie);
+    }
+
+    has(title) {
+        let movies = this.find(title);
+
+        return movies.length > 0;
+    }
 }
 
 module.exports = MovieStore;
