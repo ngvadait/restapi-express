@@ -1,7 +1,7 @@
 let express = require("express");
 let bodyParser = require('body-parser');
 let app = express();
-let movieRouter = require('./movie-router');
+let movieRouter = require('./router/movie-router');
 
 app.use(bodyParser.json({
     type: 'application/json'

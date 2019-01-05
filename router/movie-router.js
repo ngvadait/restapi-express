@@ -1,13 +1,10 @@
 let express = require("express");
 let movieRouter = express.Router();
 
-let MovieStore = require('./moviestore');
+let MovieStore = require('../moviestore');
 let movieStore = new MovieStore();
 
-function paginate(data, size, page) {
-    let index = page - 1;
-    return data.slice(index * size, (index + 1) * size);
-}
+let paginate = require('../util').paginate;
 
 movieRouter.get('/', (req, res) => {
 
