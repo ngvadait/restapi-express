@@ -14,7 +14,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-    return res.send(movieStore.all());
+
+    let movies = movieStore.search(req.query.title);
+
+    return res.send({
+        payload: movies
+    });
 });
 
 app.get('/movies/:title', (req, res) => {
