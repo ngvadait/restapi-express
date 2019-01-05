@@ -37,6 +37,14 @@ class MovieStore {
 
         return true;
     }
+
+    remove(title) {
+        this.movieData = this.movieData.filter(m => m.Title !== title);
+    }
+
+    search(title) {
+        return this.movieData.filter(m => m.Title.includes(title));
+    }
 }
 
 module.exports = MovieStore;
